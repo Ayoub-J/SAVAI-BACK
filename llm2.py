@@ -10,7 +10,7 @@ api_key = os.getenv("API_KEY")
 INPUT_PATH = "tweets_cleaned_enriched.csv"                 
 TEXT_COL = "clean_text"                                    
 OUTPUT_PATH = "tweets_analyzed.csv"                        
-MODEL = "mistral-small-latest"                            
+MODEL = "mistral-tiny-latest"                            
 N_ROWS: Optional[int] = 20                                 
 SUCCESS_PAUSE_SEC = 0.8                                    
 
