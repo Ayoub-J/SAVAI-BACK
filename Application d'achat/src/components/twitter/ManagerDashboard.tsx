@@ -457,38 +457,7 @@ export default function ManagerDashboard({ onBack, onViewSettings, onSwitchRole 
           </div>
         </Card>
 
-        {/* Insights récapitulatifs */}
-        <Card className="p-6 bg-gradient-to-r from-blue-50 to-purple-50">
-          <div className="flex items-center gap-2 mb-4">
-            <TrendingUp className="w-5 h-5 text-blue-600" />
-            <h3 className="text-gray-700">Résumé des performances</h3>
-          </div>
-          <div className="grid grid-cols-4 gap-4">
-            <div className="bg-white p-4 rounded-lg">
-              <p className="text-gray-600 text-xs mb-1">Nombre moyen de tweets/jour</p>
-              <p className="text-blue-600">{avgPerDay} tweets</p>
-              <Progress value={75} className="mt-2 h-1" />
-            </div>
-            <div className="bg-white p-4 rounded-lg">
-              <p className="text-gray-600 text-xs mb-1">Taux de résolution</p>
-              <p className="text-green-600">{resolutionRate}%</p>
-              <Progress value={resolutionRate} className="mt-2 h-1" />
-            </div>
-            <div className="bg-white p-4 rounded-lg">
-              <p className="text-gray-600 text-xs mb-1">Temps de réponse moyen</p>
-              <p className="text-orange-600">{avgResponseTime} min</p>
-              <Progress value={60} className="mt-2 h-1" />
-            </div>
-            <div className="bg-white p-4 rounded-lg">
-              <p className="text-gray-600 text-xs mb-1">Satisfaction client</p>
-              <div className="flex items-center gap-1">
-                <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                <p className="text-purple-600">{satisfactionScore}/5</p>
-              </div>
-              <Progress value={92} className="mt-2 h-1" />
-            </div>
-          </div>
-        </Card>
+
       </div>
     </div>
   );
