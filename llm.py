@@ -1,9 +1,11 @@
 from mistralai import Mistral
 import pandas as pd
-import json
+from dotenv import load_dotenv
+import json, os, re, time, random
 
 # === Configuration ===
-api_key = "ymOksoQ56n8keZi0nHju6D2UbI9tzHkE"  
+load_dotenv()
+api_key = os.getenv("API_KEY") 
 input_path = "tweets_cleaned_enriched.csv"  
 output_path = "tweets_analyzed.csv"         
 
