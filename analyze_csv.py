@@ -8,7 +8,7 @@ from telecom_analyzer import analyze_tweets
 INPUT_PATH = "tweets_cleaned_enriched.csv"
 TEXT_COL = "clean_text"
 OUTPUT_PATH = "tweets_analyzed.csv"
-N_ROWS = 20  # None = tout
+N_ROWS = 50  
 
 def main():
     load_dotenv()
