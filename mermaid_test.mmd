@@ -1,53 +1,76 @@
-flowchart LR
-    %% === Collecte ===
-    subgraph Collecte
-        XAPI["API X"]
-        ServiceCollecte["Service de collecte"]
-        DB["Base de donnees"]
-        Bus["Bus de messages"]
+%% flowchart LR
+%%     %% === Collecte ===
+%%     subgraph Collecte
+%%         XAPI["API X"]
+%%         ServiceCollecte["Service de collecte"]
+%%         DB["Base de donnees"]
+%%         Bus["Bus de messages"]
 
-        XAPI -->|"Tweets comptes Free"| ServiceCollecte
-        ServiceCollecte -->|"Tweets bruts"| DB
-        ServiceCollecte -->|"Tweets bruts"| Bus
+%%         XAPI -->|"Tweets comptes Free"| ServiceCollecte
+%%         ServiceCollecte -->|"Tweets bruts"| DB
+%%         ServiceCollecte -->|"Tweets bruts"| Bus
+%%     end
+
+%%     %% === Pre-traitement & classification ===
+%%     subgraph Traitement_Classification
+%%         MSPre["MS pre-traitement & nettoyage"]
+%%         MSClass["MS classification & calcul des insights/KPI"]
+%%         Front["Front tableaux de bord"]
+
+%%         Bus --> MSPre
+%%         MSPre -->|"Tweets nettoyes et filtres"| MSClass
+%%         MSClass -->|"Variables techniques et KPI"| DB
+%%         MSClass -->|"Donnees pour dashboards"| Front
+%%         MSClass -->|"Tweet + variables extraites"| ServiceRep["Service generation de reponse"]
+%%     end
+
+%%     %% === Generation de reponse ===
+%%     subgraph Generation_Reponse
+%%         ServiceRep --> LLM["LLM + RAG (base de connaissance)"]
+%%         LLM -->|"Reponse + score de confiance"| Decision{"Confiance >= seuil ?"}
+
+%%         Decision -->|"Oui"| Auto["Reponse automatique"]
+%%         Decision -->|"Non"| Draft["Brouillon vers agent"]
+
+%%         Auto -->|"Reponse"| DB
+%%         Auto -->|"Reponse"| XAPIRetour["API X - retour client"]
+%%         Auto -->|"Temps de reponse"| Metrics["KPIs temps de reponse"]
+
+%%         Draft --> Agent["Agent humain"]
+%%         Agent -->|"Valide / modifie"| XAPIRetour
+%%         Agent -->|"Reponse validee"| DB
+%%         Agent -->|"Temps de reponse"| Metrics
+%%     end
+
+%%     %% === Tableaux de bord & Backoffice ===
+%%     subgraph Dashboards
+%%         Dash["Tableaux de bord (agent / analyste / manager / direction)"]
+%%         Backoffice["Backoffice parametrage"]
+
+%%         DB --> Dash
+%%         Metrics --> Dash
+%%         Dash --> Backoffice
+%%     end
+
+graph LR
+    subgraph "Zones de Sécurité"
+        subgraph "DMZ"
+            NGINX2[Nginx/WAF]
+        end
+        
+        subgraph "Application Zone"
+            APPS[Services]
+        end
+        
+        subgraph "Data Zone"
+            DBS[Databases]
+        end
     end
-
-    %% === Pre-traitement & classification ===
-    subgraph Traitement_Classification
-        MSPre["MS pre-traitement & nettoyage"]
-        MSClass["MS classification & calcul des insights/KPI"]
-        Front["Front tableaux de bord"]
-
-        Bus --> MSPre
-        MSPre -->|"Tweets nettoyes et filtres"| MSClass
-        MSClass -->|"Variables techniques et KPI"| DB
-        MSClass -->|"Donnees pour dashboards"| Front
-        MSClass -->|"Tweet + variables extraites"| ServiceRep["Service generation de reponse"]
-    end
-
-    %% === Generation de reponse ===
-    subgraph Generation_Reponse
-        ServiceRep --> LLM["LLM + RAG (base de connaissance)"]
-        LLM -->|"Reponse + score de confiance"| Decision{"Confiance >= seuil ?"}
-
-        Decision -->|"Oui"| Auto["Reponse automatique"]
-        Decision -->|"Non"| Draft["Brouillon vers agent"]
-
-        Auto -->|"Reponse"| DB
-        Auto -->|"Reponse"| XAPIRetour["API X - retour client"]
-        Auto -->|"Temps de reponse"| Metrics["KPIs temps de reponse"]
-
-        Draft --> Agent["Agent humain"]
-        Agent -->|"Valide / modifie"| XAPIRetour
-        Agent -->|"Reponse validee"| DB
-        Agent -->|"Temps de reponse"| Metrics
-    end
-
-    %% === Tableaux de bord & Backoffice ===
-    subgraph Dashboards
-        Dash["Tableaux de bord (agent / analyste / manager / direction)"]
-        Backoffice["Backoffice parametrage"]
-
-        DB --> Dash
-        Metrics --> Dash
-        Dash --> Backoffice
-    end
+    
+    Internet -->|HTTPS| NGINX2
+    NGINX2 -->|Internal| APPS
+    APPS -->|Encrypted| DBS
+    
+    style NGINX2 fill:#ff6b6b
+    style APPS fill:#4ecdc4
+    style DBS fill:#45b7d1
