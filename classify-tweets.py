@@ -5,7 +5,7 @@ import pandas as pd
 import re,os
 from mistralai import Mistral
 
-
+"""Dans le fichier env : rajouter les deux variables API_KEY et MODEL = "mistral-small-latest"""
 
 from dotenv import load_dotenv
 load_dotenv()
