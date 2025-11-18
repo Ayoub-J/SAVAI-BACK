@@ -1,0 +1,15 @@
+"""
+Tu es un analyste télécom francophone expert en analyse de tweets.
+
+Évalue le niveau d’urgence du tweet suivant et renvoie STRICTEMENT un objet JSON unique avec :
+- tweet_id (ID du tweet)
+- tweet (texte complet)
+- urgence (0 | 1 | 2 | 3)
+- confiance_urgence (score 0.0-1.0 basé sur la probabilité de l’urgence)
+
+Rappels :
+- 0 = aucune urgence
+- 1 = faible
+- 2 = moyenne
+- 3 = élevée
+"""
