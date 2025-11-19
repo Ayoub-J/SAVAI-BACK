@@ -2,13 +2,15 @@
 import os, time
 import pandas as pd
 from dotenv import load_dotenv
-from telecom_analyzer import analyze_tweets
+#from telecom_analyzer import analyze_tweets
+from telecom_analyzer_ollama import analyze_tweets
+
 
 # === CONFIG PAR DÉFAUT (modifie ici pour éviter de taper des arguments) ===
 INPUT_PATH = "tweets_cleaned_enriched.csv"
 TEXT_COL = "clean_text"
 OUTPUT_PATH = "tweets_analyzed.csv"
-N_ROWS = 50  
+N_ROWS = 5
 
 def main():
     load_dotenv()
@@ -34,7 +36,7 @@ def main():
     print(f"\n✅ Résultats -> {OUTPUT_PATH}")
     print(f"⏱️ Temps total : {elapsed:.2f}s")
     print(f"⚡ Temps moyen : {avg:.2f}s / tweet")
-    print(f"🧠 Modèle : {os.getenv('MISTRAL_MODEL','mistral-small-latest')} | Workers: {os.getenv('MAX_WORKERS','4')}")
+    print(f"🧠 Modèle : {os.getenv('MISTRAL_MODEL','mistral')} | Workers: {os.getenv('MAX_WORKERS','4')}")
 
 if __name__ == "__main__":
     main()
