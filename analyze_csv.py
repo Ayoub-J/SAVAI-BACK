@@ -36,7 +36,7 @@ def main():
     print(f"\n✅ Résultats -> {OUTPUT_PATH}")
     print(f"⏱️ Temps total : {elapsed:.2f}s")
     print(f"⚡ Temps moyen : {avg:.2f}s / tweet")
-    print(f"🧠 Modèle : {os.getenv('MISTRAL_MODEL','mistral')} | Workers: {os.getenv('MAX_WORKERS','4')}")
+    print(f"🧠 Modèle : {os.getenv('MISTRAL_MODEL','mistral')} | Workers: {os.getenv('MAX_WORKERS','3')}")
 
 if __name__ == "__main__":
     main()

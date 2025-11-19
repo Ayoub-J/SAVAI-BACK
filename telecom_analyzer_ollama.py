@@ -16,7 +16,7 @@ FEWSHOTS_PATH = os.path.join(PROMPT_DIR, "few_shots.txt")
 BRACES = re.compile(r"\{.*\}", re.DOTALL)
 
 MODEL = os.getenv("MISTRAL_MODEL", "mistral")
-MAX_WORKERS = int(os.getenv("MAX_WORKERS", "4"))
+MAX_WORKERS = int(os.getenv("MAX_WORKERS", "3"))
 
 
 # =============== CHARGEMENT PROMPTS ===================
