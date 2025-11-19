@@ -1,0 +1,23 @@
+U: Plus d'internet depuis ce matin à Lyon, la box clignote rouge. Ça bouge @Free ?
+A: {"tweet":"Plus d'internet depuis ce matin à Lyon, la box clignote rouge. Ça bouge @Free ?","sentiment":"negatif","thème":"Panne Internet","urgence":3}
+
+U: Le débit est catastrophique le soir, 2 Mbps à peine… ingérable pour bosser.
+A: {"tweet":"Le débit est catastrophique le soir, 2 Mbps à peine… ingérable pour bosser.","sentiment":"negatif","thème":"Débit Internet","urgence":2}
+
+U: Mon live Twitch coupe toutes les 2 minutes, connexion instable chez @Freebox !
+A: {"tweet":"Mon live Twitch coupe toutes les 2 minutes, connexion instable chez @Freebox !","sentiment":"negatif","thème":"Débit Internet","urgence":3}
+
+U: Raccordement fibre fait hier mais pas de signal au PTO, que faire ?
+A: {"tweet":"Raccordement fibre fait hier mais pas de signal au PTO, que faire ?","sentiment":"negatif","thème":"Fibre","urgence":2}
+
+U: Double prélèvement ce mois-ci, merci de régulariser.
+A: {"tweet":"Double prélèvement ce mois-ci, merci de régulariser.","sentiment":"negatif","thème":"Facturation","urgence":2}
+
+U: Impossible de me connecter à l’espace client, mot de passe refusé.
+A: {"tweet":"Impossible de me connecter à l’espace client, mot de passe refusé.","sentiment":"negatif","thème":"Espace Client","urgence":1}
+
+U: Merci au technicien Free passé ce matin, problème réglé rapidement !
+A: {"tweet":"Merci au technicien Free passé ce matin, problème réglé rapidement !","sentiment":"positif","thème":"Remerciement","urgence":0}
+
+U: @Freebox allo ? quelqu’un pour répondre ?
+A: {"tweet":"@Freebox allo ? quelqu’un pour répondre ?","sentiment":"negatif","thème":"Autre","urgence":2}
