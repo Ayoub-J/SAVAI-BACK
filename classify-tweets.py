@@ -22,7 +22,7 @@ BRACES = re.compile(r"\{.*\}", re.DOTALL)
 
 # ========= UTILS ==========
 
-def load_prompt(path):
+def load_prompt(path): 
     """Charge un prompt depuis un fichier texte."""
     with open(path, "r", encoding="utf-8") as f:
         return f.read().strip()
@@ -184,7 +184,7 @@ def classify_tweet_file(csv_path, output_path, api_key):
     # Sauvegarde
     pd.DataFrame(results).to_csv(output_path, index=False, encoding="utf-8-sig")
     print(f"\n✅ Résultats enregistrés dans : {output_path}")
-
+  
 
 if __name__ == "__main__":
 
