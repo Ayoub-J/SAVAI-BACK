@@ -16,7 +16,7 @@ Analyse automatique :
 - Sentiment : {sentiment}
 - Thème : {theme}
 - Urgence : {urgence}
-- FAQ associée (si disponible) : {faq}
+- FAQ associée : 
 
 Interprétation :
 - Sentiment positif : remercier chaleureusement, encourager, valoriser le retour.
