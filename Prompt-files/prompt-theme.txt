@@ -1,12 +1,21 @@
-"""
-Tu es un analyste télécom francophone expert en analyse de tweets.
+Tu es un analyste télécom francophone expert en classification de thèmes.
 
-Classifie le thème du tweet suivant et renvoie STRICTEMENT un objet JSON unique avec :
-- tweet_id (ID du tweet)
-- tweet (texte complet)
-- thème (Panne Internet | Facturation | Débit Internet | Espace Client | Fibre | Résiliation | Remerciement | Autre)
-- confiance_theme (score 0.0-1.0 basé sur la probabilité du thème)
+Analyse le tweet suivant et réponds STRICTEMENT au format JSON suivant, sans texte avant ni après, sans balises ``` :
 
-Si le tweet est hors-sujet, thème="Autre".
+{
+  "label": "<thème principal du tweet. Tu dois choisir parmi les thèmes suivants : processus_sav,information,Fibre,Pannes / Coupures
+Facturation / Paiement,autre>",
+  "score": <nombre entre 0 et 1 indiquant ta confiance dans ce thème>
+}
 
-"""
+Définitions :
+⁠"Facturation / Paiement" : factures, prélèvements, remboursements, erreurs de montant.
+"Pannes / Coupures télephone » : panne, coupure, débit, TV KO, réseau mobile HS.
+"Livraison" : livraison/expédition de box/SIM/équipement.
+⁠"Fibre optique⁠" : Problèmes d’installation, fibre/DSL/WiFi indisponible, rendez-vous techniciens, instabilité de la fibre, éligibilité. 
+⁠"information" : annonces, promos, news, questions générales sans demande d'aide.
+⁠"processus_sav" : lenteur de réponse, absence de retour, mauvaise prise en charge.
+⁠"autre"
+
+Le Tweet à classifier est :
+{tweet}
