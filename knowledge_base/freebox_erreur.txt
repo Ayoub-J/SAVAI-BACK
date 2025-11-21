@@ -1,0 +1,20 @@
+Erreurs & Dysfonctionnements Freebox
+
+1. Codes Erreur Courants
+- Erreur 20/21 : problème de synchronisation DSL.
+- Erreur 80/81 : problème réseau interne.
+- Erreur fibre LOS : perte du signal optique.
+
+2. Méthodes de résolution
+- Redémarrage simple (débrancher/rebrancher).
+- Redémarrage usine (menu système Freebox).
+- Vérification des branchements Fibre/DSL.
+
+3. Problèmes TV
+- Écran noir : vérifier HDMI et redémarrer le Player.
+- Freebox TV figée : reboot du Player + Server.
+- Pixelisation : vérifier la qualité du réseau.
+
+4. Freebox Server
+- Vérifier qu’il obtient bien une adresse IP.
+- Mise à jour automatique (ne pas couper l’alimentation).

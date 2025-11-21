@@ -1,0 +1,22 @@
+Pannes Fibre – Guide SAV Free
+
+1. Vérifications rapides
+- Vérifier que tous les câbles sont bien branchés (alimentation, fibre, jarretière).
+- La jarretière optique ne doit pas être pliée ou écrasée.
+- S’assurer qu’aucune prise n’a été débranchée récemment.
+
+2. Voyants Freebox Fibre
+- PON fixe : connexion fibre OK.
+- PON clignotant : synchronisation en cours.
+- LOS rouge : coupure fibre ou signal optique absent.
+- Aucun voyant : vérifier l’alimentation.
+
+3. Étapes de diagnostic
+- Redémarrer le Server Freebox.
+- Tester avec un autre port optique si disponible.
+- Éteindre puis rallumer l’ONT (si modèle avec ONT séparé).
+
+4. Cas nécessitant un technicien
+- Fibre coupée ou arrachée dans le logement.
+- Perte totale du signal optique.
+- Absence de raccordement dans le boîtier PTO.

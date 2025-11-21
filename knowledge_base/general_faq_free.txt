@@ -1,0 +1,19 @@
+FAQ Générale Free
+
+1. Création d’un compte
+- Via l’espace abonné en renseignant les informations personnelles.
+
+2. Suivi de commande
+- Suivi en ligne avec numéro de commande.
+
+3. Activation de ligne
+- Mobile : activation carte SIM dans l’espace abonné.
+- Freebox : activation automatique lors de la synchronisation.
+
+4. Délais d’activation
+- Freebox Fibre : 3 à 10 jours en moyenne.
+- Mobile : immédiat après activation SIM.
+
+5. Identifiants Free
+- Adresse mail @free.fr + mot de passe associé.
+- Récupération possible via le site en cas d’oubli.

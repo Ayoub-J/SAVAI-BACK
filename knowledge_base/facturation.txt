@@ -1,0 +1,17 @@
+Facturation – Freebox & Mobile
+
+1. Paiements
+- Paiement le 2 de chaque mois.
+- En cas d’échec : paiement manuel possible depuis l’espace abonné.
+
+2. Problèmes de prélèvement
+- Changer d’IBAN dans l’espace abonné.
+- Vérifier que le compte est suffisamment approvisionné.
+
+3. Contestation de facture
+- Contacter le service client via téléphone ou courrier.
+- Préciser l’objet de la contestation, dates et montants.
+
+4. Frais divers
+- Frais de non-restitution du matériel.
+- Frais liés à des options activées.

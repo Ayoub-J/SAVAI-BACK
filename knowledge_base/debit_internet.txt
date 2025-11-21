@@ -1,0 +1,19 @@
+Internet – Débit faible & Wi-Fi instable
+
+1. Tests de base
+- Redémarrer la Freebox.
+- Tester la connexion en Ethernet pour isoler le problème Wi-Fi.
+- Faire un test de débit sur speedtest.net.
+
+2. Optimiser le Wi-Fi
+- Placer la Freebox en hauteur, loin des murs et appareils métalliques.
+- Éviter les interférences : micro-ondes, enceintes Bluetooth, voisins.
+- Changer de canal Wi-Fi depuis l’application Freebox Connect.
+
+3. Problèmes Ethernet
+- Tester un autre câble RJ45.
+- Vérifier que la carte réseau est en mode « Auto 1 Gbps ».
+
+4. Symptômes fréquents
+- Débit réduit le soir = saturation locale temporaire.
+- Lag en Wi-Fi mais pas en Ethernet = problème réseau interne.

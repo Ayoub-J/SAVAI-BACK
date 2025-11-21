@@ -14,10 +14,14 @@ MODEL = os.getenv("MODEL", "mistral-large-2411")
 API_KEY = os.getenv("API_KEY")
 
 # Pour aller vite mais rester un minimum safe
-MAX_RETRIES = 2
-SUCCESS_PAUSE_SEC = 0.3   # petite pause entre tweets
-BACKOFF_BASE_SEC = 1
-BACKOFF_JITTER_SEC = (0, 0.5)
+MAX_RETRIES = 5               # Beaucoup plus sûr
+SUCCESS_PAUSE_SEC = 1.0       # Pause pour éviter 429
+BACKOFF_BASE_SEC = 2          # Backoff plus long
+BACKOFF_JITTER_SEC = (0.5, 1.5)
+
+
+# Traitement par batch
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", "100"))  # ex : 100 tweets par batch
 
 # Regex JSON NON-GOURMANDE
 BRACES = re.compile(r"\{.*?\}", re.DOTALL)
@@ -32,7 +36,7 @@ def load_prompt(path: str) -> str:
 def extract_json(text: str):
     """
     Essaye de parser la réponse du LLM comme JSON :
-    - enlève les éventuelles balises ```json
+    - enlève les éventuelles balises json
     - tente json.loads sur le texte complet
     - fallback sur le premier bloc {...}
     """
@@ -41,13 +45,13 @@ def extract_json(text: str):
 
     text = text.strip()
 
-    # Enlever ```json ... ``` si présent
-    if text.startswith("```"):
+    # Enlever json ...  si présent
+    if text.startswith(""):
         lines = text.splitlines()
         if lines:
-            if lines[0].startswith("```"):
+            if lines[0].startswith(""):
                 lines = lines[1:]
-            if lines and lines[-1].strip().startswith("```"):
+            if lines and lines[-1].strip().startswith(""):
                 lines = lines[:-1]
             text = "\n".join(lines).strip()
 
@@ -168,7 +172,7 @@ def classify_single_tweet(client, tweet: str,
 
 
 # ============================================================================
-# FONCTION PRINCIPALE
+# FONCTION PRINCIPALE (TRAITEMENT PAR BATCH)
 # ============================================================================
 
 def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
@@ -179,52 +183,79 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
     if "id" not in df.columns or "tweet" not in df.columns:
         raise ValueError("❌ Le CSV doit contenir les colonnes 'id' et 'tweet'")
 
-    print(f"✅ {len(df)} lignes chargées.")
+    total = len(df)
+    print(f"✅ {total} lignes chargées.")
+    print(f"🔄 Traitement par batch de {BATCH_SIZE} tweets.")
 
     # Chargement des 3 prompts
     sentiment_prompt = load_prompt("Prompt-files/prompt-sentiment.txt")
     theme_prompt = load_prompt("Prompt-files/prompt-theme.txt")
     urgence_prompt = load_prompt("Prompt-files/prompt-urgence.txt")
 
-    results = []
+    # Si un ancien fichier existe, on le supprime pour repartir propre
+    if os.path.exists(output_path):
+        os.remove(output_path)
 
     with Mistral(api_key=api_key) as client:
-        for i, row in enumerate(df.itertuples(index=False), start=1):
-            tweet_id = row.id
-            tweet_text = str(row.tweet)
+        batch_index = 0
 
-            print(f"▶ [{i}/{len(df)}] Analyse tweet {tweet_id} ...")
+        for start in range(0, total, BATCH_SIZE):
+            end = min(start + BATCH_SIZE, total)
+            batch_index += 1
+            print(f"\n📦 Batch {batch_index} : lignes {start+1} à {end} / {total}")
 
-            try:
-                r = classify_single_tweet(
-                    client,
-                    tweet_text,
-                    sentiment_prompt,
-                    theme_prompt,
-                    urgence_prompt
-                )
-                r["tweet_id"] = tweet_id
+            batch_df = df.iloc[start:end]
+            batch_results = []
 
-            except Exception as e:
-                print(f"⚠️ Erreur tweet {tweet_id}: {e}")
-                r = {
-                    "tweet_id": tweet_id,
-                    "tweet": tweet_text,
-                    "sentiment": "neutre",
-                    "sentiment_score": 0.0,
-                    "theme": "Autre",
-                    "theme_score": 0.0,
-                    "urgence": 0,
-                    "urgence_score": 0.0,
-                    "confiance": 0.0
-                }
+            for i, row in enumerate(batch_df.itertuples(index=False), start=start+1):
+                tweet_id = row.id
+                tweet_text = str(row.tweet)
 
-            results.append(r)
-            time.sleep(SUCCESS_PAUSE_SEC)
+                print(f"▶ [{i}/{total}] Analyse tweet {tweet_id} ...")
 
-    print(f"\n💾 Sauvegarde des résultats dans : {output_path}")
-    pd.DataFrame(results).to_csv(output_path, index=False, encoding="utf-8-sig")
-    print(f"✅ Fichier écrit avec {len(results)} lignes.")
+                try:
+                    r = classify_single_tweet(
+                        client,
+                        tweet_text,
+                        sentiment_prompt,
+                        theme_prompt,
+                        urgence_prompt
+                    )
+                    r["tweet_id"] = tweet_id
+
+                except Exception as e:
+                    print(f"⚠ Erreur tweet {tweet_id}: {e}")
+                    r = {
+                        "tweet_id": tweet_id,
+                        "tweet": tweet_text,
+                        "sentiment": "neutre",
+                        "sentiment_score": 0.0,
+                        "theme": "Autre",
+                        "theme_score": 0.0,
+                        "urgence": 0,
+                        "urgence_score": 0.0,
+                        "confiance": 0.0
+                    }
+
+                batch_results.append(r)
+                time.sleep(SUCCESS_PAUSE_SEC)
+
+            # Écriture des résultats du batch en mode append
+            df_batch_res = pd.DataFrame(batch_results)
+
+            write_header = not os.path.exists(output_path)
+            df_batch_res.to_csv(
+                output_path,
+                mode="a",
+                index=False,
+                encoding="utf-8-sig",
+                header=write_header
+            )
+
+            print(f"💾 Batch {batch_index} sauvegardé ({len(batch_results)} lignes).")
+
+    print(f"\n✅ Tous les batches sont traités.")
+    print(f"💾 Résultats finaux dans : {output_path}")
 
 
 # ============================================================================
@@ -233,10 +264,9 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
 
 if __name__ == "__main__":
 
-    INPUT_CSV = "LLM-classified-data/LLM - DATA.csv"
+    INPUT_CSV = "LLM-classified-data/tweets_free_cleaned.csv"
     OUTPUT_CSV = "LLM-classified-data/tweets_classified.csv"
 
     print("🚀 Lancement de la classification...")
     classify_tweet_file(INPUT_CSV, OUTPUT_CSV, API_KEY)
-    print("🎉 Terminé ! Fichier généré :", OUTPUT_CSV)
     print("🎉 Terminé ! Fichier généré :", OUTPUT_CSV)

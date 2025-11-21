@@ -1,0 +1,19 @@
+Mobile – Réseau & SIM
+
+1. Problèmes réseau
+- Vérifier si une panne nationale est en cours.
+- Forcer le téléphone en 3G/4G/5G.
+- Activer/désactiver le mode avion.
+
+2. Carte SIM
+- Tester la SIM dans un autre téléphone.
+- Nettoyer la carte SIM si elle ne détecte plus.
+- En cas de perte/vol : ligne suspendue immédiatement.
+
+3. Portabilité
+- Le RIO est accessible au 3179.
+- Portabilité effective sous 3 jours ouvrés.
+
+4. MMS / APN
+- Vérifier la configuration APN Free Mobile.
+- Activer les données mobiles et le roaming (pour certains MMS).

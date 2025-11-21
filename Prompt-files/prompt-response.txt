@@ -18,6 +18,10 @@ Analyse automatique :
 - Urgence : {urgence}
 - FAQ associée : 
 
+FAQ utile :
+{faq}
+
+
 Interprétation :
 - Sentiment positif : remercier chaleureusement, encourager, valoriser le retour.
 - Sentiment neutre : réponse informative, factuelle, professionnelle.
