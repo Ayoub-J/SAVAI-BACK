@@ -13,18 +13,13 @@ load_dotenv()
 MODEL = os.getenv("MODEL", "mistral-large-2411")
 API_KEY = os.getenv("API_KEY")
 
-# Pour aller vite mais rester un minimum safe
-MAX_RETRIES = 5               # Beaucoup plus sûr
-SUCCESS_PAUSE_SEC = 1.0       # Pause pour éviter 429
-BACKOFF_BASE_SEC = 2          # Backoff plus long
-BACKOFF_JITTER_SEC = (0.5, 1.5)
+MAX_RETRIES = 5
+SUCCESS_PAUSE_SEC = 1.0
+BACKOFF_BASE_SEC = 2
+BATCH_SIZE = int(os.getenv("BATCH_SIZE", "100"))
 
-
-# Traitement par batch
-BATCH_SIZE = int(os.getenv("BATCH_SIZE", "100"))  # ex : 100 tweets par batch
-
-# Regex JSON NON-GOURMANDE
-BRACES = re.compile(r"\{.*?\}", re.DOTALL)
+# Regex JSON robuste
+JSON_BLOCK = re.compile(r"\{[\s\S]*?\}", re.MULTILINE)
 
 # ========= UTILS ==========
 
@@ -33,51 +28,53 @@ def load_prompt(path: str) -> str:
     with open(path, "r", encoding="utf-8") as f:
         return f.read().strip()
 
+
 def extract_json(text: str):
     """
-    Essaye de parser la réponse du LLM comme JSON :
-    - enlève les éventuelles balises json
-    - tente json.loads sur le texte complet
-    - fallback sur le premier bloc {...}
+    Extraction JSON robuste :
+    - essai direct
+    - fallback sur blocs {...}
     """
     if not text:
         return None
 
     text = text.strip()
 
-    # Enlever json ...  si présent
-    if text.startswith(""):
-        lines = text.splitlines()
-        if lines:
-            if lines[0].startswith(""):
-                lines = lines[1:]
-            if lines and lines[-1].strip().startswith(""):
-                lines = lines[:-1]
-            text = "\n".join(lines).strip()
-
-    # Tentative 1 : JSON direct
+    # Tentative directe
     try:
         return json.loads(text)
-    except Exception:
+    except:
         pass
 
-    # Tentative 2 : premier bloc {...}
-    m = BRACES.search(text)
-    if not m:
-        return None
-    candidate = m.group(0)
-    try:
-        return json.loads(candidate)
-    except Exception:
-        return None
+    # Recherche de tous les blocs JSON
+    blocks = JSON_BLOCK.findall(text)
+    for b in blocks:
+        try:
+            return json.loads(b)
+        except:
+            pass
+
+    return None
+
 
 def call_llm_with_retry(client, prompt: str) -> str:
-    """Appel LLM avec retry léger + backoff."""
+    """Appel LLM avec retry + rôle system pour forcer JSON."""
+
     for attempt in range(MAX_RETRIES):
         try:
             res = client.chat.complete(
                 model=MODEL,
-                messages=[{"role": "user", "content": prompt}],
+                messages=[
+                    {
+                        "role": "system",
+                        "content": (
+                            "Tu es un modèle strict. "
+                            "Tu dois répondre EXCLUSIVEMENT en JSON valide. "
+                            "Aucun texte autour."
+                        )
+                    },
+                    {"role": "user", "content": prompt}
+                ],
                 temperature=0.1,
                 max_tokens=200,
                 stream=False
@@ -87,14 +84,9 @@ def call_llm_with_retry(client, prompt: str) -> str:
         except Exception as e:
             s = str(e).lower()
 
-            # Capacité max du modèle — inutile de retenter
-            if "service tier capacity exceeded" in s or "3505" in s:
-                print("❌ Capacité du service atteinte pour ce modèle. Pas de retry.")
-                raise
-
-            # Rate limit — on retente légèrement
+            # Rate limit
             if ("429" in s or "too many" in s) and attempt < MAX_RETRIES - 1:
-                delay = BACKOFF_BASE_SEC * (2 ** attempt) + random.uniform(*BACKOFF_JITTER_SEC)
+                delay = BACKOFF_BASE_SEC * (2 ** attempt)
                 print(f"⏳ Retry dans {delay:.1f}s... (429 reçu)")
                 time.sleep(delay)
                 continue
@@ -102,56 +94,45 @@ def call_llm_with_retry(client, prompt: str) -> str:
             raise
 
 
-# ============================================================================
-# FONCTION : CLASSIFIER UN SEUL TWEET (3 APPELS LLM)
-# ============================================================================
+# =====================================================================
+# CLASSIFICATION D’UN TWEET (3 appels)
+# =====================================================================
 
 def classify_single_tweet(client, tweet: str,
                           sentiment_prompt: str,
                           theme_prompt: str,
                           urgence_prompt: str):
-    """
-    Utilise 3 prompts distincts (sentiment / thème / urgence),
-    chacun renvoyant un JSON du type : { "label": "...", "score": 0.x }
-    """
-
-    # Pour garantir que le tweet est TOUJOURS dans le prompt
-    def build_prompt(base_prompt: str, tweet: str) -> str:
-        if "{tweet}" in base_prompt:
-            return base_prompt.replace("{tweet}", tweet)
-        return f"{base_prompt}\n\nTweet à analyser : {tweet}"
 
     def normalize(parsed, default_label, default_score=0.0):
-        """Normalise en {label, score} avec valeurs par défaut."""
+        """Sécurise le parsing JSON."""
         if not isinstance(parsed, dict):
             return {"label": default_label, "score": default_score}
 
         label = parsed.get("label", default_label)
-        score_raw = parsed.get("score", default_score)
 
         try:
-            score = float(score_raw)
-        except Exception:
+            score = float(parsed.get("score", default_score))
+        except:
             score = default_score
 
         return {"label": label, "score": score}
 
-    # --- Sentiment ---
-    sent_prompt_f = build_prompt(sentiment_prompt, tweet)
-    sent_raw = call_llm_with_retry(client, sent_prompt_f)
-    sent_json = normalize(extract_json(sent_raw), default_label="neutre")
+    # SENTIMENT
+    sent_prompt_full = sentiment_prompt.replace("{tweet}", tweet)
+    sent_raw = call_llm_with_retry(client, sent_prompt_full)
+    sent_json = normalize(extract_json(sent_raw), "neutre")
 
-    # --- Thème ---
-    theme_prompt_f = build_prompt(theme_prompt, tweet)
-    theme_raw = call_llm_with_retry(client, theme_prompt_f)
-    theme_json = normalize(extract_json(theme_raw), default_label="Autre")
+    # THEME
+    theme_prompt_full = theme_prompt.replace("{tweet}", tweet)
+    theme_raw = call_llm_with_retry(client, theme_prompt_full)
+    theme_json = normalize(extract_json(theme_raw), "autre")
 
-    # --- Urgence ---
-    urg_prompt_f = build_prompt(urgence_prompt, tweet)
-    urg_raw = call_llm_with_retry(client, urg_prompt_f)
-    urg_json = normalize(extract_json(urg_raw), default_label=0)
+    # URGENCE
+    urg_prompt_full = urgence_prompt.replace("{tweet}", tweet)
+    urg_raw = call_llm_with_retry(client, urg_prompt_full)
+    urg_json = normalize(extract_json(urg_raw), 0)
 
-    # --- Confiance globale ---
+    # SCORE GLOBAL
     global_conf = round(
         0.333 * sent_json["score"] +
         0.333 * theme_json["score"] +
@@ -171,9 +152,9 @@ def classify_single_tweet(client, tweet: str,
     }
 
 
-# ============================================================================
-# FONCTION PRINCIPALE (TRAITEMENT PAR BATCH)
-# ============================================================================
+# =====================================================================
+# TRAITEMENT PAR BATCH
+# =====================================================================
 
 def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
 
@@ -187,12 +168,12 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
     print(f"✅ {total} lignes chargées.")
     print(f"🔄 Traitement par batch de {BATCH_SIZE} tweets.")
 
-    # Chargement des 3 prompts
+    # Chargement des prompts
     sentiment_prompt = load_prompt("Prompt-files/prompt-sentiment.txt")
     theme_prompt = load_prompt("Prompt-files/prompt-theme.txt")
     urgence_prompt = load_prompt("Prompt-files/prompt-urgence.txt")
 
-    # Si un ancien fichier existe, on le supprime pour repartir propre
+    # Suppression de l'ancien fichier
     if os.path.exists(output_path):
         os.remove(output_path)
 
@@ -202,6 +183,7 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
         for start in range(0, total, BATCH_SIZE):
             end = min(start + BATCH_SIZE, total)
             batch_index += 1
+
             print(f"\n📦 Batch {batch_index} : lignes {start+1} à {end} / {total}")
 
             batch_df = df.iloc[start:end]
@@ -230,7 +212,7 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
                         "tweet": tweet_text,
                         "sentiment": "neutre",
                         "sentiment_score": 0.0,
-                        "theme": "Autre",
+                        "theme": "autre",
                         "theme_score": 0.0,
                         "urgence": 0,
                         "urgence_score": 0.0,
@@ -240,7 +222,6 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
                 batch_results.append(r)
                 time.sleep(SUCCESS_PAUSE_SEC)
 
-            # Écriture des résultats du batch en mode append
             df_batch_res = pd.DataFrame(batch_results)
 
             write_header = not os.path.exists(output_path)
@@ -258,9 +239,9 @@ def classify_tweet_file(csv_path: str, output_path: str, api_key: str):
     print(f"💾 Résultats finaux dans : {output_path}")
 
 
-# ============================================================================
+# =====================================================================
 # MAIN
-# ============================================================================
+# =====================================================================
 
 if __name__ == "__main__":
 
