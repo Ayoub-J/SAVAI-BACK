@@ -1,0 +1,60 @@
+id,tweet,sentiment,thème,urgence,confiance
+1343458257915031553,"à parce que débit très instable, n nfree en france: vitesse, performances, pannes et commentaires des utilisateurs n internet free n nvia",negatif,Débit Internet,2,0.85
+1485331097844129798,et vous ça se passe comment la fibre ? n c est la misère vraiment jpp,negatif,Fibre,2,0.82
+1694675653205860558,"dans la lutte contre les installations sauvages et les infrastructures dégradées, la bonne formation des techniciens qui déploient la fibre est essentielle. j étais ce matin aux côtés d idriss, formateur au centre de formation technique à argenteuil, dan",positif,Fibre,0,0.78
+1695912123824546156,"hello , et je crois que nous allons avoir prochainement un gros problème de fibre pboe",negatif,Fibre,1,0.72
+1711773973401235737,"n nen 3 ans l équipe technique de free le boc m a t on dit n est pas capable d amener 3 mètres ou moins! de câble fibre, afin que j ai la fibre cercle rouge comme mes voisines dont nos maisons sont mitoyennes cercles verts . satisfaisant?!",negatif,Fibre,2,0.88
+1759266279620247842,". a 25 ans et tient toujours ses promesses en terme de pouvoir d achat et d innovation. 3 quinquennats sans toucher aux prix de nos forfaits mobiles, voilà une promesse à laquelle les français peuvent croire",positif,Remerciement,0,0.9
+1762571081402011959,ça fonctionne super bien la fibre free ce soir... franchement c est abusé. déjà l autre soir la tv de free oqee était carrément indisponible ! ftth fibre free var,negatif,Panne Internet,3,0.92
+1811040987365421110,"et tout le réseau sachez qu une main courante va être déposée, et ira plus loin s il le faut. n6 appels en 24h avec 6 numéros différents quand je demande de retirer mon numéro de vos bases de données c est du harcèlement. nvos forfaits de merd",negatif,Autre,3,0.86
+1812874502642049501,"installer la fibre sans autorisation du propriétaire et en perçant de partout, c est normal ?",negatif,Fibre,2,0.84
+1813101958900879811,"on ne se rend pas assez compte que sans xavier niel aujourd hui on paierait tous nos forfaits 144,99 avec 65 sms par jour, 2h d appel par mois et 150mo de données mobiles",positif,Remerciement,0,0.88
+1813579520819286432,"le service proximité de 1 des plus grosses arnaques de ces dernières années.incompétents et complètement dépassés.tu en sais plus qu eux,tu leur dis ce qui marche pas,tu prends un rdv avec un technicien qui vient que ds 1 semaine! npratique",negatif,Espace Client,3,0.9
+1813581407668871481,"comment vous joindre ? j ai été débité pour non restitution de matériel pour une résiliation de ligne que je n ai pas effectuée moi même, impossible de vous joindre car mes identifiants n existent plus, vos relances sont arrivées directement.",negatif,Facturation,3,0.88
+1813586665371513000,ma fibre hs depuis 3 semaines,negatif,Panne Internet,3,0.94
+1813586931986698575,vous pouvez m envoyer les avengers de la fibre svp les mêmes que j ai chez ça fait 1mois que j attend,negatif,Fibre,3,0.86
+1813604838682325386,"bon je travaille en remote chez moi et ça fait 1 semaine que j ai plus de connexion avec , ils ont envoyé un technicien qui a dit on vous envoie un autres tech et depuis plus de nouvelles, de base je kiff free, le boss etc etc mais la ,,,.",negatif,Panne Internet,3,0.9
+1813625655374098443,il va falloir revoir la sélection des installateurs de fibre optique !!! j ai pas commandé un fil pour étendre mon linge le voisin non plus ! donc va falloir revenir !!!,negatif,Fibre,2,0.88
+1813684903856468282,pourquoi j ai des bugs de connexion wsh je paye la fibre,negatif,Panne Internet,2,0.86
+1813698687253746036,merci de m avoir fait passer une super soirée en live et merci pour ces 2 déconnexions pour une mise à jour de la box en pleine soirée... n nen l espace de 2 mois j ai déjà eu 2 soucis majeur de connexion avec votre box.... et ça sans jamais aucun,negatif,Panne Internet,3,0.9
+1813886775799984228,"c est normal des signalements pour pertes de synchro des dizaines de fois par jour , des rendez vous techniciens annulé sans prévenir le client, une assistance téléphonique qui indique que la ligne est rétablie alors que la freebox est en étape 3? f",negatif,Panne Internet,3,0.92
+1814009656504885552,depuis le 23 06 je suis en attente d un rdv pour la fibre chez je suis du coup pas encore client et je pense qu a cette allure là je ne le serai jamais !! honteux,negatif,Fibre,2,0.88
+1814031065990001071,moi aussi j attend le technicien depuis une semaine,negatif,Fibre,2,0.84
+1814034736118927866,"allo,avez vous des nouvelles pour le réseau svp ???",neutre,Panne Internet,1,0.8
+1814035247333253492,non plus rien depuis 15 mn même coralie est chez free en téléphonie et pas de réseau,negatif,Panne Internet,2,0.82
+1814215859520352478,bonjour j ai fait installer votre box depuis 10 min. mais comment on fait pour avoir un être humain en ligne pour assistance ? impossible au 3244 ni au 1044. merci,negatif,Espace Client,2,0.86
+1814220122342470038,"bonjour free. cela fait 1 mois que je n ai plus internet. un rdv avait été fixé puis annulé pour, je cite puisque vous deviez intervenir dans les plus brefs délais . nnous avons as la même notion de bref délais. nque faut il faire pour avoir internet ?",negatif,Panne Internet,3,0.92
+1814232564715966700,"nbonjour monsieur niel nvoila plus 20 ans que j encense free depuis freesurf ! nj ai tous mes forfaits chez vous ... ndepuis le 15 fev maintenant, je n ai plu la fibre pro dans ma société qui, de fait, est en péril ... que faire ??? nquelle déception ...",negatif,Panne Internet,3,0.9
+1814238911964512258,normal pour vous qu un des vos employés a souscrit a ma place sans mon accord un abonnement free mobile et que l on me demande d envoyer un courrier de rétractation pour un abonnement que je n ai pas pris ?,negatif,Facturation,3,0.9
+1814253298322477539,dites vous n avez pas honte de couper toute connexion et d afficher un message d erreur sur la freebox contactez un technicien pour installer la fibre c est quoi ce forcing en pleines vacances d été? vous pouvez pas attendre la rentrée? on n est p,negatif,Panne Internet,3,0.88
+1814266726114107603,"3 semaines sans internet et rien ne bouge malgré plusieurs appels, des rdv techniciens annulés... chez free quand ça fonctionne c est bien mais quand il y a un problème technique il n y a plus personne, ni même au téléphone. chez free j ai tout co",negatif,Panne Internet,3,0.92
+1814276844889289006,"impossible de contacter l assistance free si c est pas avec le numero de mobile de la personne concernée ! super, on peut pas aider les retraités !!",negatif,Espace Client,2,0.88
+1814296005510144260,"l assistance free devient complètement aberrante, l invention de proxy n arrange pas moins la situation",negatif,Espace Client,2,0.84
+1814327641547145515,c est normal de balader vos clients victimes d un écrasement de ligne pendant un mois sans aucune information sur un délai d intervention ? pourtant la loi vous donne 8 jours pour rétablir la connexion. ou alors free je n ai pas tout compris,negatif,Panne Internet,3,0.9
+1814336903992541578,c est quoi le problème avec ? la wifi de chez moi n arrête pas de sauter. je paye 48 par mois pour ne pas avoir de connexion. foutaise !,negatif,Panne Internet,3,0.9
+1814348139559612633,"commence vraiment à m agacer . 3 jours pas de tv pas d internet, censé être rétabli à 16h, toujours rien. c est pas la 1ere fois que ça merde",negatif,Panne Internet,3,0.92
+1814348631937311037,"n ncoucou ! nje n arrive pas à me faire comprendre par votre conseiller, n nje souhaite avoir freebox ultra. nje possède déjà un abo netflix prime : n nje n aurai plus qu à payer la différence entre le tarif de votre forfait netflix et le prix de ma formule ?",neutre,Espace Client,1,0.78
+1814351242035884167,problème de flux tv sur levallois 92300 alors que le débit internet est ok nvous avez des soucis identifiés ?,neutre,Panne Internet,1,0.82
+1814353725663916160,idem ! est à cause de la panne mondiale ?,neutre,Panne Internet,1,0.76
+1814354533444673583,"oui moi aussi ma freebox reste avec l écran figé. pour internet pas de problème, mais la télé une catastrophe j ai éteint et rallumé la freebox tv mais impossible de regarder les chaînes tv",negatif,Panne Internet,2,0.88
+1814356388652429578,panne freebox en cours n 20 freenautes ont signalé des pannes internet dont 15 sur le réseau fibre de free depuis 15h19 n ville concernée : la roque d anthéron 13640 n n,neutre,Panne Internet,2,0.84
+1814361238320595218,y a t il un pb sur le réseau ? aucune communication !!! aucun message !!!! ça serait bien d informer les clients !!!!,negatif,Panne Internet,2,0.86
+1814362029194617328,panne tv ici dans 78. ndowndetector remonte une explosion des problèmes?une communication ?,neutre,Panne Internet,2,0.82
+1814362356207759446,encore et encore,negatif,Panne Internet,2,0.74
+1814363066600947901,je confirme! panne sur free tv oqee!,neutre,Panne Internet,2,0.84
+1814364867035324900,"problème panne authentification de la freebox bloquée sur étape 6, département des landes depuis 20mn environ",neutre,Panne Internet,2,0.86
+1814365177191534630,oui panne sur les freebox,neutre,Panne Internet,2,0.82
+1814365932426539130,vous aussi vous êtes bloqués à l étape 6 avec votre freebox? panne free freebox,neutre,Panne Internet,2,0.84
+1814365941045604823,"panne internet plus de , franceinfotv, chez",neutre,Panne Internet,2,0.8
+1814366025778864287,bonjour pas de connexion ce soir sur ma box,neutre,Panne Internet,2,0.82
+1814366189977583632,"oui pareil, apparemment il y a une panne",neutre,Panne Internet,2,0.82
+1814366412007256112,bonjour free ! incidents en ce moment en fibre sur la france ? dans l herault ? béziers ? merci de votre réponse,neutre,Panne Internet,1,0.84
+1814366416214048928,plus d internet depuis 45 mn ??,neutre,Panne Internet,2,0.8
+1814366706392863042,et sa continue maintenant internet freebox qui fonctionne plus merde,negatif,Panne Internet,2,0.84
+1814367603932143955,"n freeboxultra pireboxdumonde ndéjà un débit pourrit, la tv qui freeze comme de l adsl et la carrément rien qui marche ce soir et pour prévenir de l incident ça ne marche pas non plus ndifficile de ne pas vs détester la",negatif,Panne Internet,3,0.92
+1814367744072228929,n non est vendredi soir. je n ai plus aucune chaîne de télévision depuis une demi heure. aucun accès non plus à l assistance en ligne page d erreur ou par téléphone ne répond pas . n netonnamment ça commence à me gonfler.,negatif,Panne Internet,3,0.9
+1814368111984029869,il y a une panne chez free ou quoi? ma box est bloqué à l étape 6,neutre,Panne Internet,2,0.82
+1814368425491222821,help free plis d internet et impossible de vous joindre par téléphone,negatif,Panne Internet,3,0.88
+1814368437122035989,encore en panne sur besançon mais c est quoi ce bordel depuis 2mois ???? n freebox free,negatif,Panne Internet,3,0.9
+1814368731113324770,panne freebox probleme connexion,neutre,Panne Internet,2,0.82
+1814368748637192638,en panne aussi,neutre,Panne Internet,2,0.78
