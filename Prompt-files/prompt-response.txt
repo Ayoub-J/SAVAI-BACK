@@ -19,13 +19,170 @@ Analyse automatique :
 - FAQ associée : 
 
 FAQ utile :
-{faq}
+Internet – Débit faible & Wi-Fi instable
+
+1. Tests de base
+- Redémarrer la Freebox.
+- Tester la connexion en Ethernet pour isoler le problème Wi-Fi.
+- Faire un test de débit sur speedtest.net.
+
+2. Optimiser le Wi-Fi
+- Placer la Freebox en hauteur, loin des murs et appareils métalliques.
+- Éviter les interférences : micro-ondes, enceintes Bluetooth, voisins.
+- Changer de canal Wi-Fi depuis l’application Freebox Connect.
+
+3. Problèmes Ethernet
+- Tester un autre câble RJ45.
+- Vérifier que la carte réseau est en mode « Auto 1 Gbps ».
+
+4. Symptômes fréquents
+- Débit réduit le soir = saturation locale temporaire.
+- Lag en Wi-Fi mais pas en Ethernet = problème réseau interne.
+
+Facturation – Freebox & Mobile
+
+1. Paiements
+- Paiement le 2 de chaque mois.
+- En cas d’échec : paiement manuel possible depuis l’espace abonné.
+
+2. Problèmes de prélèvement
+- Changer d’IBAN dans l’espace abonné.
+- Vérifier que le compte est suffisamment approvisionné.
+
+3. Contestation de facture
+- Contacter le service client via téléphone ou courrier.
+- Préciser l’objet de la contestation, dates et montants.
+
+4. Frais divers
+- Frais de non-restitution du matériel.
+- Frais liés à des options activées.
+
+Erreurs & Dysfonctionnements Freebox
+
+1. Codes Erreur Courants
+- Erreur 20/21 : problème de synchronisation DSL.
+- Erreur 80/81 : problème réseau interne.
+- Erreur fibre LOS : perte du signal optique.
+
+2. Méthodes de résolution
+- Redémarrage simple (débrancher/rebrancher).
+- Redémarrage usine (menu système Freebox).
+- Vérification des branchements Fibre/DSL.
+
+3. Problèmes TV
+- Écran noir : vérifier HDMI et redémarrer le Player.
+- Freebox TV figée : reboot du Player + Server.
+- Pixelisation : vérifier la qualité du réseau.
+
+4. Freebox Server
+- Vérifier qu’il obtient bien une adresse IP.
+- Mise à jour automatique (ne pas couper l’alimentation).
+
+FAQ Générale Free
+
+1. Création d’un compte
+- Via l’espace abonné en renseignant les informations personnelles.
+
+2. Suivi de commande
+- Suivi en ligne avec numéro de commande.
+
+3. Activation de ligne
+- Mobile : activation carte SIM dans l’espace abonné.
+- Freebox : activation automatique lors de la synchronisation.
+
+4. Délais d’activation
+- Freebox Fibre : 3 à 10 jours en moyenne.
+- Mobile : immédiat après activation SIM.
+
+5. Identifiants Free
+- Adresse mail @free.fr + mot de passe associé.
+- Récupération possible via le site en cas d’oubli.
+
+Mobile – Réseau & SIM
+
+1. Problèmes réseau
+- Vérifier si une panne nationale est en cours.
+- Forcer le téléphone en 3G/4G/5G.
+- Activer/désactiver le mode avion.
+
+2. Carte SIM
+- Tester la SIM dans un autre téléphone.
+- Nettoyer la carte SIM si elle ne détecte plus.
+- En cas de perte/vol : ligne suspendue immédiatement.
+
+3. Portabilité
+- Le RIO est accessible au 3179.
+- Portabilité effective sous 3 jours ouvrés.
+
+4. MMS / APN
+- Vérifier la configuration APN Free Mobile.
+- Activer les données mobiles et le roaming (pour certains MMS).
+
+Pannes Fibre – Guide SAV Free
+
+1. Vérifications rapides
+- Vérifier que tous les câbles sont bien branchés (alimentation, fibre, jarretière).
+- La jarretière optique ne doit pas être pliée ou écrasée.
+- S’assurer qu’aucune prise n’a été débranchée récemment.
+
+2. Voyants Freebox Fibre
+- PON fixe : connexion fibre OK.
+- PON clignotant : synchronisation en cours.
+- LOS rouge : coupure fibre ou signal optique absent.
+- Aucun voyant : vérifier l’alimentation.
+
+3. Étapes de diagnostic
+- Redémarrer le Server Freebox.
+- Tester avec un autre port optique si disponible.
+- Éteindre puis rallumer l’ONT (si modèle avec ONT séparé).
+
+4. Cas nécessitant un technicien
+- Fibre coupée ou arrachée dans le logement.
+- Perte totale du signal optique.
+- Absence de raccordement dans le boîtier PTO.
+
+Procédures de Résiliation Freebox & Mobile
+
+1. Résiliation Freebox
+- Demande à adresser par courrier recommandé.
+- Adresse : Free – Service Résiliation, 75371 Paris Cedex 08.
+- Retour du matériel sous 15 jours après confirmation.
+
+2. Résiliation Mobile
+- Via l’espace abonné ou en utilisant le code RIO.
+- La portabilité sortante résilie automatiquement la ligne Free.
+
+3. Frais éventuels
+- Frais de non-restitution du matériel.
+- Frais d’option si engagement.
+
+4. Délais
+- Résiliation effective sous 10 jours ouvrés en général.
+
+Contacts & Assistance SAV Free
+
+1. Numéros officiels
+- 3244 : assistance Freebox/Mobile (inclus depuis Freebox).
+- 1044 : service commercial.
+
+2. Assistance en ligne
+- Espace abonné Freebox ou Mobile.
+- Diagnostic en ligne.
+- Planning technicien.
+
+3. Horaires
+- 7j/7, selon plages spécifiques (variable selon service).
+
+4. Free Proxi
+- Assistance locale disponible dans certaines zones.
+
+
 
 
 Interprétation :
 - Sentiment positif : remercier chaleureusement, encourager, valoriser le retour.
 - Sentiment neutre : réponse informative, factuelle, professionnelle.
-- Sentiment négatif : excuses + empathie + rassurer + proposer une solution ou un canal de prise en charge.
+- Sentiment negatif : excuses + empathie + rassurer + proposer une solution ou un canal de prise en charge.
 
 Utilisation du thème :
 - Exemple : service_client, debit_internet, panne_fibre, facturation, mobile, autre.
@@ -48,3 +205,5 @@ Contraintes :
 - Ne donne pas de détails techniques précis ou de promesses impossibles.
 
 Maintenant, écris UNIQUEMENT la réponse que Free doit envoyer.
+La réponse doit être personnalisée en fonction de la requête de l'utilisateur. Propose toujours une solution pour répondre à son besoin.
+

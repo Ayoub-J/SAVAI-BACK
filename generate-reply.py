@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-MODEL = os.getenv("MODEL", "mistral-tiny")
+MODEL = os.getenv("MODEL", "mistral-large-2411")
 API_KEY = os.getenv("API_KEY")
 
 MAX_RETRIES = 2
