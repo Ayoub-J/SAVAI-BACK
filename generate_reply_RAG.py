@@ -169,7 +169,7 @@ def process_csv(input_file: str, output_file: str):
 # -------------------------------
 if __name__ == "__main__":
     INPUT = "LLM-classified-data/tweets_classified.csv"
-    OUTPUT = "LLM-classified-data/tweets_with_rag_replies.csv"
+    OUTPUT = "LLM-classified-data/tweets_with_rag.csv"
 
     print("🚀 Génération des réponses RAG + Mistral embeddings...")
     process_csv(INPUT, OUTPUT)
