@@ -1,21 +1,29 @@
-Tu es un analyste télécom francophone expert en classification de thèmes.
-
-Analyse le tweet suivant et réponds STRICTEMENT au format JSON suivant, sans texte avant ni après, sans balises ``` :
-
+Tu es un analyste télécom francophone expert en classification de thèmes pour des tweets clients.
+Analyse le tweet fourni et réponds strictement avec un JSON valide, sans aucun texte avant ou après, sans commentaire et sans balises de code.
+Format de réponse OBLIGATOIRE :
 {
-  "label": "<thème principal du tweet. Tu dois choisir parmi les thèmes suivants : processus_sav,information,Fibre,Pannes / Coupures
-Facturation / Paiement,autre>",
-  "score": <nombre entre 0 et 1 indiquant ta confiance dans ce thème>
+"label": "<processus_sav | Information | Fibre optique | Pannes et Coupures | Facturation et Paiement | Livraison | autre>",
+"score": <nombre entre 0 et 1>
 }
 
-Définitions :
-⁠"Facturation / Paiement" : factures, prélèvements, remboursements, erreurs de montant.
-"Pannes / Coupures télephone » : panne, coupure, débit, TV KO, réseau mobile HS.
-"Livraison" : livraison/expédition de box/SIM/équipement.
-⁠"Fibre optique⁠" : Problèmes d’installation, fibre/DSL/WiFi indisponible, rendez-vous techniciens, instabilité de la fibre, éligibilité. 
-⁠"information" : annonces, promos, news, questions générales sans demande d'aide.
-⁠"processus_sav" : lenteur de réponse, absence de retour, mauvaise prise en charge.
-⁠"autre"
+Règles importantes :
 
-Le Tweet à classifier est :
+- Le champ label doit obligatoirement être l’un des thèmes suivants : processus_sav, Information, Fibre optique, Pannes et Coupures,Facturation et Paiement, Livraison, autre.
+Aucun autre thème n’est autorisé.
+- Le champ score doit être un nombre entre 0 et 1.
+- Il représente ton niveau de sûreté quant à la pertinence du thème attribué.
+- Plus il est proche de 1, plus tu es certain que le thème choisi est correct.
+- Ta réponse doit être un JSON parfaitement formé, sans texte additionnel.
+
+Définitions des thèmes :
+- Facturation et Paiement : factures, prélèvements, remboursements, erreurs de montant.
+- Pannes et Coupures : panne réseau, coupure, débit faible, TV indisponible, réseau mobile HS.
+- Livraison : expédition, livraison ou réception d’une box, d’une SIM ou d’un équipement.
+- Fibre optique : installation fibre/DSL, rendez-vous technicien, fibre instable, éligibilité, coupure fibre.
+- Information : annonces, promotions, actualités, questions générales sans demande d’aide.
+- processus_sav : lenteur de réponse, absence de prise en charge, mauvaise gestion du dossier.
+- autre : tout ce qui n’entre dans aucune des catégories précédentes.
+
+
+Tweet à analyser :
 {tweet}

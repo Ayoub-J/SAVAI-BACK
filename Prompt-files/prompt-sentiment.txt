@@ -7,5 +7,12 @@ Analyse le tweet suivant et réponds STRICTEMENT au format JSON suivant, sans te
   "score": <nombre entre 0 et 1 indiquant ta confiance dans ce label>
 }
 
+
+Règles importantes :
+- Le champ label doit être uniquement : positif, neutre ou negatif (sans accents).
+- Le champ score doit être un nombre décimal entre 0 et 1 représentant ta confiance.
+- Ta réponse doit être un JSON parfaitement formé.
+- N’ajoute aucune phrase, aucun préfixe, aucun suffixe.
+
 Le Tweet à classifier est  :
 {tweet}
