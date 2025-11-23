@@ -1,31 +1,50 @@
 import streamlit as st
 import pandas as pd
 
-st.title("🧑‍💼 Agent SAV – Traitement des tweets urgents")
+st.set_page_config(page_title="Agent SAV", layout="wide")
 
-if "df" not in st.session_state:
-    st.error("Veuillez d'abord importer un fichier CSV dans la page d’accueil.")
+if "data" not in st.session_state:
+    st.error("⚠️ Aucun fichier importé. Retournez à la page d’accueil.")
     st.stop()
 
-df = st.session_state["df"]
+df = st.session_state["data"].copy()
 
-# Filtrer les urgences
-urgent_df = df[df["urgence"] >= 1]
+st.markdown("<h1>👨‍💻 Espace Agent SAV</h1>", unsafe_allow_html=True)
 
-st.subheader("🔥 Tweets urgents à traiter")
-st.write("Tweets classés comme prioritaires par le modèle :")
+# ---------------- KPIs ----------------
+col1, col2, col3, col4 = st.columns(4)
 
-for i, row in urgent_df.iterrows():
-    with st.container(border=True):
-        st.markdown(f"**Tweet :** {row['tweet']}")
-        st.markdown(f"**Sentiment :** {row['sentiment']} ({row['sentiment_score']})")
-        st.markdown(f"**Thème :** {row['theme']} ({row['theme_score']})")
-        st.markdown(f"**Urgence :** {row['urgence']} ({row['urgence_score']})")
-        st.markdown(f"**Confiance globale :** {row['confiance']}")
-        
-        st.markdown("### 💬 Proposition de réponse IA :")
-        st.info(row["reponse_free"])
+with col1:
+    st.metric("Confiance < 90%", df[df["confiance"] < 0.90].shape[0])
 
-        st.button("Valider", key=f"valider_{i}")
-        st.button("Modifier la réponse", key=f"modifier_{i}")
-        st.button("Ignorer", key=f"ignorer_{i}")
+with col2:
+    st.metric("Tweets restants", df.shape[0])
+
+with col3:
+    st.metric("Urgence élevée", df[df["urgence"] == "élevée"].shape[0])
+
+with col4:
+    st.metric("Tweets traités", df[df["reponse_free"].notna()].shape[0])
+
+
+st.write("---")
+
+# ---------------- Tweets à faible confiance ----------------
+st.subheader("⚠️ Tweets nécessitant une vérification (< 90% confiance)")
+
+low_conf = df[df["confiance"] < 0.90]
+
+st.dataframe(
+    low_conf[["tweet", "sentiment", "theme", "urgence", "confiance", "reponse_free"]],
+    use_container_width=True
+)
+
+st.write("---")
+
+# ---------------- Tous les tweets ----------------
+st.subheader("📋 Tous les tweets")
+
+st.dataframe(
+    df[["tweet", "sentiment", "theme", "urgence", "confiance", "reponse_free"]],
+    use_container_width=True
+)
