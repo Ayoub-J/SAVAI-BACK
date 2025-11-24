@@ -1,0 +1,15 @@
+STATISTIQUES D'ANALYSE DES TWEETS FREE
+============================================================
+
+Date d'analyse: 10/11/2025 14:59
+Volume initial: 6,375 tweets
+Volume après nettoyage: 3,107 tweets
+Taux de réduction: 51.3%
+
+Répartition des catégories (après nettoyage):
+  - Autre: 1380 (44.4%)
+  - Plainte service: 765 (24.6%)
+  - Question technique: 677 (21.8%)
+  - Réclamation RDV: 123 (4.0%)
+  - Demande d'aide: 119 (3.8%)
+  - Info/Annonce: 43 (1.4%)
